@@ -43,6 +43,7 @@ jobs:
 
     - name: Install Pre-requisite binaries
       run: |
+        sudo apt-get update && apt-get install -y tzdata
         export TZ=Europe/London
         sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
         sudo apt-get update && apt-get install -y \
