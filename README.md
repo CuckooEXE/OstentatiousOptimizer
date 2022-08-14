@@ -1,5 +1,6 @@
-[![Test](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/code-test.yml/badge.svg?branch=main)](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/code-test.yml)
-[![Docker Image Publish](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/docker-publish.yml)
+[![CodeQL Analysis](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/codeql-analysis.yml)
+[![Publish Docker Image](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/docker-publish.yml)
+[![Test Code](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/code-test.yml/badge.svg?branch=main)](https://github.com/CuckooEXE/OstentatiousOptimizer/actions/workflows/code-test.yml)
 
 # OstentatiousOptimizer
 OstentatiousOptimizer is a project that uses the LLVM toolchain to obfuscate binaries to make reverse-engineering and attribution more difficult.
