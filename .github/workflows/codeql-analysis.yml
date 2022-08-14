@@ -42,7 +42,6 @@ jobs:
         # queries: security-extended,security-and-quality
 
     - name: Install Pre-requisite binaries
-      uses: ??
       run: |
         export TZ=Europe/London
         ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
