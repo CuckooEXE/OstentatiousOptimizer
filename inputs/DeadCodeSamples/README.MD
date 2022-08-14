@@ -1,0 +1,4 @@
+# DeadCodeSamples
+This directory contains various projects which are compiled into LLVM IR to be included by OstentatiousOptimizer passes that require dead code stubs. That is, running `make` in this directory will result in _portions_ of the projects in this directory being compiled into LLVM IR, and then a pass has a _probability_ to add that LLVM IR as dead code to your tool.
+
+If you would like to add or remove projects in order to mask your tool as accomplishing a particular goal (i.e. add ffmpeg, libpng, etc. to mask your project as an AV tool), then ensure you update the Makefile in this directory to compile all, or some, of the code into LLVM IR.

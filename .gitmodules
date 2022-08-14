@@ -1,0 +1,6 @@
+[submodule "inputs/DeadCodeSamples/awk"]
+	path = inputs/DeadCodeSamples/awk
+	url = https://github.com/onetrueawk/awk.git
+[submodule "inputs/DeadCodeSamples/git"]
+	path = inputs/DeadCodeSamples/git
+	url = https://github.com/git/git.git
