@@ -9,7 +9,7 @@ DOCDIR		:= docs
 CFLAGS		:= -std=gnu++14
 INCLUDE		:= -I$$LLVM_DIR/include/
 LDFLAGS		:= 
-DEBUG_FLAGS := -g -O0 -fno-omit-frame-pointer
+DEBUG_FLAGS	:= -g -O0 -fno-omit-frame-pointer
 REL_FLAGS	:= -O3 -fomit-frame-pointer
 
 # pkg-config for external libraries
