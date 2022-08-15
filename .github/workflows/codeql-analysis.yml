@@ -42,11 +42,11 @@ jobs:
         # queries: security-extended,security-and-quality
 
     - name: Build Project
-        container:
-          image: "Dockerfile"
-          volumes:
-            - ${{ github.workspace }}:/OstentatiousOptimizer
-        run: make
+      container:
+        image: "Dockerfile"
+        volumes:
+          - ${{ github.workspace }}:/OstentatiousOptimizer
+      run: make
     
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
