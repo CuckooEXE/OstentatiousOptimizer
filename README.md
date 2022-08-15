@@ -29,9 +29,7 @@ The following are passes that are (or will be) included in OstentatiousOptimizer
 Status:
  - [ ] `reliner`
  - [ ] `OpaquePredicates`
- - [ ] Dead Instruction Injection
- - [ ] Dead Code Injection
- - [ ] Dead Function Injection
+ - [ ] `BeyondTheGrave`
  - [ ] Hell's Gate
  - [ ] Basic Block Scrambler
 
@@ -41,14 +39,13 @@ Status:
 ### OpaquePredicates
 `OpaquePredicates`  implements multiple classes of [opaque predicates](https://en.wikipedia.org/wiki/Opaque_predicate) which will obfuscate the control flow graph of the binary. 
 
-### Dead Instruction Injection
-`DJI` will inject instructions that will never be executed by ensuring that calls and jumps avoid executing the injected instructions.
+### BeyondTheGrave
+`BeyondTheGrave` takes in a (configurable) library of code samples, and uses the library to inject:
+    - Dead Instructions
+    - Dead Blocks
+    - Dead Functions
 
-### Dead Code Injection
-`DCI` will inject code blocks that will never be executed by ensuring that calls and jumps avoid executing the injected blocks.
-
-### Dead Function Injection
-`DFI` will inject entire functions (try giving it functions from OSS projects!) that will never be executed by ensuring that calls and jumps avoid executing the injected functions.
+The Pass uses `jmp` instructions to ensure that the injected code is never called. This Pass can help disguise your tool as accomplishing something; by configuring the Pass to use specific code bases (i.e. has `ffmpeg`, `libpng`, etc.) the dead code might suggest to an automated scanner that your tool accomplishes something else.
 
 ### Hell's Gate
 [Hell's Gate](https://vxug.fakedoma.in/papers/VXUG/Exclusive/HellsGate.pdf) implementation in LLVM IR that will automatically translate Windows API Calls into "direct syscalls" whenever possible.
