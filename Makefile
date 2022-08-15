@@ -1,5 +1,5 @@
-CC			:= clang
-CXX			:= clang++
+CC			:= clang-14
+CXX			:= clang++-14
 LD			:= ld.gold
 OPT			:= opt
 BINDIR		:= bin
