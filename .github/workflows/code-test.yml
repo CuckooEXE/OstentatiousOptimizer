@@ -41,7 +41,8 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Run Tests
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          run: make clean test
+        container:
+          image: "Dockerfile"
+          volumes:
+            - ${{ github.workspace }}:/OstentatiousOptimizer
+        run: make clean test

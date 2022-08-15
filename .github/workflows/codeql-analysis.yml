@@ -41,36 +41,12 @@ jobs:
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: Install Pre-requisite binaries
-      run: |
-        sudo apt-get update && sudo apt-get install -y tzdata
-        export TZ=Europe/London
-        sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-        sudo apt-get update && apt-get install -y \
-            git \
-            cmake \
-            ninja-build \
-            build-essential \
-            python3-minimal python3-pip\
-            wget \
-            software-properties-common \
-            && rm -rf /var/lib/apt/lists/*
-        sudo wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-        sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-14 main"
-        sudo apt-get update
-        sudo apt-get install -y llvm-14 llvm-14-dev llvm-14-tools clang-14
-        sudo apt-get install -y python3-setuptools
-        
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-
-    #   If the Autobuild fails above, remove it and uncomment the following three lines. 
-    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-
-    - run: |
-        make
-
+    - name: Build Project
+        container:
+          image: "Dockerfile"
+          volumes:
+            - ${{ github.workspace }}:/OstentatiousOptimizer
+        run: make
+    
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
