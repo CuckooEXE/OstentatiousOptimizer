@@ -41,12 +41,11 @@ jobs:
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: Build Project
-      container:
-        image: "Dockerfile"
-        volumes:
-          - ${{ github.workspace }}:/OstentatiousOptimizer
-      run: make
+    - name: Build Image
+      run: docker build --tag local:latest .
+    
+    - name: Run Tests
+      run: docker run --volume ${{ github.workspace }}:/OstentatiousOptimizer local:latest make clean test
     
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
