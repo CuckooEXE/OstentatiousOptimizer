@@ -11,6 +11,7 @@ on:
 
 jobs:
   analyze:
+    if: ${{ false }}  # Disable until container issue is figured out
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
