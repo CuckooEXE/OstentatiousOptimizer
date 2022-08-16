@@ -1,7 +1,7 @@
 CC			:= clang-14
 CXX			:= clang++-14
 LD			:= ld.gold
-OPT			:= opt
+OPT			:= opt-14
 BINDIR		:= bin
 LIBDIR		:= lib
 BUILDDIR	:= build
