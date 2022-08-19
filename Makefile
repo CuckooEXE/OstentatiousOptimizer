@@ -28,7 +28,7 @@ clean:
 
 # Build all of OstentatiousOptimizer
 OstentatiousOptimizer: $(LIBDIR)/libOstentatiousOptimizer.so
-$(LIBDIR)/libOstentatiousOptimizer.so:
+$(LIBDIR)/libOstentatiousOptimizer.so: src/*.cc include/*.hh
 	mkdir -p $(LIBDIR)/
 	$(CXX) $(WARNFLAGS) $(LLVM_CFLAGS) $(DEBUG_FLAGS) $(INCLUDE) -Iinclude/ -fPIC -shared -Wl,-soname,libOstentatiousOptimizer.so -o $(LIBDIR)/libOstentatiousOptimizer.so src/*.cc $(LLVM_LDFLAGS)
 
@@ -39,9 +39,21 @@ $(BUILDDIR)/math.ll: inputs/math.c
 	$(CC) -S -O0 -emit-llvm inputs/math.c -o $(BUILDDIR)/math.ll
 
 # Test
-test: inputs OstentatiousOptimizer
+test: test-BeyondTheGrave test-reliner
+test-BeyondTheGrave: OstentatiousOptimizer inputs
+	$(MAKE) -C inputs/DeadCodeSamples/
 	mkdir -p $(BUILDDIR)/
-	$(OPT) -debug-pass-manager -S -load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so -passes="reliner,print-functions" $(BUILDDIR)/math.ll > $(BUILDDIR)/math.relined.ll
+	$(OPT) -debug-pass-manager -S \
+		-load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so \
+		-passes="BeyondTheGrave" \
+		$(BUILDDIR)/math.ll > $(BUILDDIR)/math.relined.ll
+
+test-reliner: OstentatiousOptimizer inputs
+	mkdir -p $(BUILDDIR)/
+	$(OPT) -debug-pass-manager -S \
+		-load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so \
+		-passes="reliner" \
+		$(BUILDDIR)/math.ll > $(BUILDDIR)/math.relined.ll
 	$(CC) -S -mllvm --x86-asm-syntax=intel -o $(BUILDDIR)/math.s $(BUILDDIR)/math.relined.ll
 	$(CC) -o $(BUILDDIR)/math $(BUILDDIR)/math.relined.ll
 	$(BUILDDIR)/math ; test $$? -eq 40

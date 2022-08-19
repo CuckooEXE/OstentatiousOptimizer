@@ -24,6 +24,15 @@ llvm::PassPluginLibraryInfo getInjectFuncCallPluginInfo() {
                 }
                 return false;
             });
+        PB.registerPipelineParsingCallback(
+            [](llvm::StringRef Name, llvm::ModulePassManager &MPM,
+                llvm::ArrayRef<llvm::PassBuilder::PipelineElement>) {
+                if (Name == BEYONDTHEGRAVE_PASSNAME) {
+                    MPM.addPass(BeyondTheGrave());
+                    return true;
+                }
+                return false;
+            });
         }
     };
 }
