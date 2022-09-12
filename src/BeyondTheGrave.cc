@@ -1,20 +1,31 @@
 #include "BeyondTheGrave.hh"
 
-using namespace llvm;
+std::vector<llvm::BasicBlock> dead_code_samples;
 
-// static cl::opt<std::string> DeadCodeInputDir("asdf", cl::desc("Directory of Dead Code Bitcode"));
-std::string DeadCodeInputDir = "inputs/DeadCodeSamples/build/";
-
-bool BeyondTheGrave::runOnModule(Module& M)
+bool generate_samples()
 {
-    for (Function& F : M)
-        LOG_HEAD << " Function: " << F.getName() << "\n";
+    llvm::LLVMContext context;
+    // IRBuilder<> builder(context);
+
     return false;
 }
 
-PreservedAnalyses BeyondTheGrave::run(llvm::Module &M, llvm::ModuleAnalysisManager &)
+bool BeyondTheGrave::runOnFunction(llvm::Function& F)
 {
-    LOG_HEAD << " DeadCodeInputDir: " << DeadCodeInputDir << "\n";
-    return (runOnModule(M) ? llvm::PreservedAnalyses::none()
+    LOG_HEAD << " Function: " << F.getName() << "\n";
+
+
+    // auto Val39 = llvm::ConstantInt::get();
+    // auto Val151 = llvm::ConstantInt::get(BinOp->getType(), 151);
+    // auto Val23 = llvm::ConstantInt::get(BinOp->getType(), 23);
+    // auto Val2 = llvm::ConstantInt::get(BinOp->getType(), 2);
+    // auto Val111 = llvm::ConstantInt::get(BinOp->getType(), 111);
+    
+    return false;
+}
+
+llvm::PreservedAnalyses BeyondTheGrave::run(llvm::Function &F, llvm::FunctionAnalysisManager &FAM)
+{
+    return (runOnFunction(F) ? llvm::PreservedAnalyses::none()
                   : llvm::PreservedAnalyses::all());
 }

@@ -12,7 +12,8 @@
 #define BEYONDTHEGRAVE_H_
 
 #include "common.hh"
-#include "llvm/Support/CommandLine.h"
+#include <llvm/Support/CommandLine.h>
+#include <llvm/IR/IRBuilder.h>
 
 #undef PASSNAME
 #undef DEBUG_TYPE
@@ -32,12 +33,10 @@ struct BeyondTheGrave : public llvm::PassInfoMixin<BeyondTheGrave> {
      * @param M Module to analyze
      * @return llvm::PreservedAnalyses Analysis of the module
      */
-    llvm::PreservedAnalyses run(
-        llvm::Module &M,
-        llvm::ModuleAnalysisManager &
-    );
+    llvm::PreservedAnalyses run(llvm::Function &F, llvm::FunctionAnalysisManager &FAM);
 
-    bool runOnModule(llvm::Module &M);
+
+    bool runOnFunction(llvm::Function& F);
 };
 
 #endif // !BEYONDTHEGRAVE_H_

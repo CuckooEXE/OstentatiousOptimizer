@@ -25,10 +25,10 @@ llvm::PassPluginLibraryInfo getInjectFuncCallPluginInfo() {
                 return false;
             });
         PB.registerPipelineParsingCallback(
-            [](llvm::StringRef Name, llvm::ModulePassManager &MPM,
+            [](llvm::StringRef Name, llvm::FunctionPassManager &FPM,
                 llvm::ArrayRef<llvm::PassBuilder::PipelineElement>) {
                 if (Name == BEYONDTHEGRAVE_PASSNAME) {
-                    MPM.addPass(BeyondTheGrave());
+                    FPM.addPass(BeyondTheGrave());
                     return true;
                 }
                 return false;

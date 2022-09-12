@@ -36,17 +36,17 @@ $(LIBDIR)/libOstentatiousOptimizer.so: src/*.cc include/*.hh
 inputs: $(BUILDDIR)/math.ll
 $(BUILDDIR)/math.ll: inputs/math.c
 	mkdir -p $(BUILDDIR)/
-	$(CC) -S -O0 -emit-llvm inputs/math.c -o $(BUILDDIR)/math.ll
+	$(CC) -S -O1 -emit-llvm inputs/math.c -o $(BUILDDIR)/math.ll
 
 # Test
 test: test-BeyondTheGrave test-reliner
 test-BeyondTheGrave: OstentatiousOptimizer inputs
-	$(MAKE) -C inputs/DeadCodeSamples/
+	# $(MAKE) -C inputs/DeadCodeSamples/
 	mkdir -p $(BUILDDIR)/
 	$(OPT) -debug-pass-manager -S \
 		-load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so \
 		-passes="BeyondTheGrave" \
-		$(BUILDDIR)/math.ll > $(BUILDDIR)/math.relined.ll
+		$(BUILDDIR)/math.ll > $(BUILDDIR)/math.BeyondTheGrave.ll
 
 test-reliner: OstentatiousOptimizer inputs
 	mkdir -p $(BUILDDIR)/
