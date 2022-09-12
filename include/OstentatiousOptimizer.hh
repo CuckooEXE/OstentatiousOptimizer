@@ -12,9 +12,12 @@
 #define OSTENTATIOUSOPTIMIZER_H_
 
 #include "common.hh"
+#include <tuple>
+#include <vector>
 
 #include "reliner.hh"
 #include "BeyondTheGrave.hh"
+#include "BBScrambler.hh"
 #include "PrintFunctions.hh"
 
 #endif // !OSTENTATIOUSOPTIMIZER_H_

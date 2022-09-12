@@ -12,12 +12,12 @@ clean:
 git: output/git*.ll
 output/git*.ll: git/
 	mkdir -p $(BUILDDIR)/git/
-	$(CC) -S -O0 -emit-llvm -DNO_OPENSSL -Igit/ git/str*.c
+	$(CC) -S -O1 -emit-llvm -DNO_OPENSSL -Igit/ git/str*.c
 	mv *.ll $(BUILDDIR)/git/
 
 awk: output/awk*.ll
 output/awk*.ll: awk/
 	mkdir -p $(BUILDDIR)/awk/
-	$(CC) -S -O0 -emit-llvm -Iawk/ awk/lib.c
-	$(CC) -S -O0 -emit-llvm -Iawk/ awk/tran.c
+	$(CC) -S -O1 -emit-llvm -Iawk/ awk/lib.c
+	$(CC) -S -O1 -emit-llvm -Iawk/ awk/tran.c
 	mv *.ll $(BUILDDIR)/awk/

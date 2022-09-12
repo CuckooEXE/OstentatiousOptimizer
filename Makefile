@@ -37,9 +37,11 @@ inputs: $(BUILDDIR)/math.ll
 $(BUILDDIR)/math.ll: inputs/math.c
 	mkdir -p $(BUILDDIR)/
 	$(CC) -S -O1 -emit-llvm inputs/math.c -o $(BUILDDIR)/math.ll
+	$(MAKE) -C inputs/DeadCodeSamples/
+	cp inputs/DeadCodeSamples/output/**/*.ll $(BUILDDIR)/
 
 # Test
-test: test-BeyondTheGrave test-reliner
+test: test-BeyondTheGrave test-reliner test-BBScrambler
 test-BeyondTheGrave: OstentatiousOptimizer inputs
 	# $(MAKE) -C inputs/DeadCodeSamples/
 	mkdir -p $(BUILDDIR)/
@@ -47,6 +49,14 @@ test-BeyondTheGrave: OstentatiousOptimizer inputs
 		-load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so \
 		-passes="BeyondTheGrave" \
 		$(BUILDDIR)/math.ll > $(BUILDDIR)/math.BeyondTheGrave.ll
+
+test-BBScrambler: OstentatiousOptimizer inputs
+	# $(MAKE) -C inputs/DeadCodeSamples/
+	mkdir -p $(BUILDDIR)/
+	$(OPT) -debug-pass-manager -S \
+		-load-pass-plugin=$(LIBDIR)/libOstentatiousOptimizer.so \
+		-passes="BBScrambler" \
+		$(BUILDDIR)/lib.ll > $(BUILDDIR)/lib.BBScrambler.ll
 
 test-reliner: OstentatiousOptimizer inputs
 	mkdir -p $(BUILDDIR)/
