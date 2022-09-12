@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 
 ENV PROJECT OstentatiousOptimizer
 ENV LC_CTYPE C.UTF-8
+ENV LLVM_DIR /usr/lib/llvm-14/
 
 # tzdata Docker work around
 ENV DEBIAN_FRONTEND noninteractive

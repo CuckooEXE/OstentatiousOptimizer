@@ -14,6 +14,7 @@
 #include "common.hh"
 
 #include "reliner.hh"
+#include "BeyondTheGrave.hh"
 #include "PrintFunctions.hh"
 
 #endif // !OSTENTATIOUSOPTIMIZER_H_

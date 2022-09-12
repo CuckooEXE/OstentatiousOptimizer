@@ -1,6 +1,6 @@
 # This Makefile is responsible for going into each DeadCodeSamples directory and building all, or some, of the project as LLVM IR.
 #	As you can see, it's a pretty manual and imperfect process; however, as this code will never execute, it doesn't matter.
-CC			:= clang
+CC			:= clang-14
 BUILDDIR	:= output
 
 default: git awk
